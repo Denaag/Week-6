@@ -13,17 +13,15 @@ deck
 // }
 
 class CardDeck { //we want to define each playing card
-    constructor() { //what attributes a playing card has
+    constructor(CardDeck) { //what attributes a playing card has
         this.cardSuits = ["Spades", "Hearts", "Clubs", "Diamonds"]; //each suit - total is 4
         this.cardRanks = ["2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K", "A"]; //each rank - total ranks 13
         this.cardValues = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13"]; //level each card holds 1-13 (lowest to highest)
-    }
 
-    createDeck() {
         let deck = [];
         for (let i = 0; i < this.cardSuits.length; i++) { //initial loop to cycle through suits array
             for (let j = 0; j < this.cardRanks.length; j++) { // nested for loop to cycle through value array length - if you console.log(suits[i] + value[j]); this displayed all 52 cards on a new line; creating a long list we have to scroll
-                deck.push(this.cardSuits[i] + this.cardRanks[j]); //this will create the array deck (w/ drop down arrow) of all 52 on a single line and push it to the empty array deck
+                    deck.push(this.cardSuits[i] + this.cardRanks[j]); //this will create the array deck (w/ drop down arrow) of all 52 on a single line and push it to the empty array deck
             }
         }
         return deck;// this creates the deck but doesn't show it on the screen
@@ -46,7 +44,8 @@ class CardDeck { //we want to define each playing card
 }
 
 let firstDeck = new CardDeck();
-console.log(firstDeck.createDeck());
+console.log(firstDeck)
+//console.log(firstDeck.createDeck());
 console.log(firstDeck.shuffleDeck())
 
 // let firstDeck = new CardDeck(); //this is for cardDeck class
