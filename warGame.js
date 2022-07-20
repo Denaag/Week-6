@@ -104,10 +104,11 @@ class Player {
   
       let player1Card = [];
       let player2Card = [];
-      for (let i = 0; i < 26; i++) {
-        player1Card = new Player(player1)
+      for (let i = 0; i < 1; i++) {
+        console.log(player1.cards)
+        console.log(player2.cards)
       }
-    //   return player1Card
+    //    return player1Card
     }
   
     cardNames(cardValues) {
@@ -160,16 +161,16 @@ class Player {
     }
   }
   
-  let newGame = new Game();
-  console.log(newGame.turns());
-  
-  //console.log(newGame.cardNames("K"));
-  
   let firstDeck = new CardDeck();
   firstDeck.createDeck();
   console.log("just create my deck", firstDeck.deck);
   firstDeck.shuffleDeck();
   firstDeck.dealDeck();
+
+  let newGame = new Game();
+  newGame.turns();
+  
+  //console.log(newGame.cardNames("K"));
 // console.log(firstDeck)
 // console.log(player1)
 // console.log(player2)
