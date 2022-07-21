@@ -104,11 +104,12 @@ class Player {
   
       let player1Card = [];
       let player2Card = [];
-      for (let i = 0; i < 1; i++) {
-        console.log(player1.cards)
-        console.log(player2.cards)
+      for (let i = 0; i < 26; i++) {
+        player1Card = (player1.cards[0][i][1]); // 1st [0] gives array accessed - the deck. 2nd [1] gives index in array selected - the card. 3rd [0] gives index (element of the card - name or value) of that newly selected array
+        player2Card = (player2.cards[0][i][1]);
+        return player1Card;
       }
-    //    return player1Card
+    //    return player1Card;
     }
   
     cardNames(cardValues) {
@@ -169,6 +170,7 @@ class Player {
 
   let newGame = new Game();
   newGame.turns();
+  console.log("Display", newGame.player1Card)
   
   //console.log(newGame.cardNames("K"));
 // console.log(firstDeck)
