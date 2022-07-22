@@ -6,54 +6,24 @@ game
 
 class Player {
     //class in order to create player
-    constructor(name) {
+    constructor(name, cards) {
       this.name = name;
-      this.cards = [];
+      this.cards = cards;
       this.score = 0;
     }
   }
-  
-  let player1 = new Player("Player1"); //creating first player
-  let player2 = new Player("Player2");
-  console.log(player1); //logging out player before any hands are dealt
-  console.log(player2);
   
   class CardDeck {
     //we want to define each playing card
     constructor() {
       //what attributes a playing card has
       this.cardSuits = ["Spades", "Hearts", "Clubs", "Diamonds"]; //each suit - total is 4
-      this.cardRanks = [
-        "2",
-        "3",
-        "4",
-        "5",
-        "6",
-        "7",
-        "8",
-        "9",
-        "10",
-        "J",
-        "Q",
-        "K",
-        "A",
-      ]; //each rank - total ranks 13
-      this.cardValues = [
-        2,
-        3,
-        4,
-        5,
-        6,
-        7,
-        8,
-        9,
-        10,
-        11,
-        12,
-        13,
-        14,
-      ]; //level each card holds 1-13 (lowest to highest)
+      this.cardRanks = ["2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K", "A",]; //each rank - total ranks 13
+      this.cardValues = [2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14,]; //level each card holds 1-13 (lowest to highest)
       this.deck = []; //create an empty array so that the deck can be made from createDeck method
+      this.createDeck();
+      this.shuffleDeck();
+      this.dealCards();
     }
   
     createDeck() {
@@ -84,93 +54,85 @@ class Player {
       }
     }
   
-    dealDeck() {
-      //here we will deal out 2 small decks of 26 to each player
-      player1.cards.push(this.deck.slice(0, 26));
-      player2.cards.push(this.deck.slice(26, 52));
+    dealCards() {
+    //here we will deal out 2 small decks of 26 to each player
+        const half = Math.ceil(this.deck.length / 2);    
+
+        const firstHalf = this.deck.slice(0, half); //splitting an array
+        const secondHalf = this.deck.slice(half);
+
+        console.log(this.deck = [firstHalf,secondHalf]); //pushing both hands into the empty deck array
     }
   }
   
   class Game {
     //class that will create the game being played
-    constructor() {
-      //players
-      //score
-      //result
+    constructor(a, b) {
+        this.a = a;
+        this.b = b;
     }
   
     turns() {
-      //number of plays we will have
-  
-      let player1Card = [];
-      let player2Card = [];
-      for (let i = 0; i < 26; i++) {
-        player1Card = (player1.cards[0][i][1]); // 1st [0] gives array accessed - the deck. 2nd [1] gives index in array selected - the card. 3rd [0] gives index (element of the card - name or value) of that newly selected array
-        player2Card = (player2.cards[0][i][1]);
-        return player1Card;
-      }
-    //    return player1Card;
+      //number of plays we will have - it will decrease based on number of cards
+      for(let i = this.a.cards.length - 1; i > 0; i--){
+
+        if(this.a.cards[i][1] > this.b.cards[i][1]){
+            this.a.score++;
+        } else if (this.a.cards[i][1] < this.b.cards[i][1]){
+            this.b.score++;
+        } else {
+            console.log("DRAW"); // if both players play the same card
+        }
+        //this will display player1 and player2 card and provide updated score
+        console.log("PLAYER 1: " + this.a.cards[i][1] + ", SCORE: " + this.a.score+
+        "\nPLAYER 2: " + this.b.cards[i][1] + ", SCORE: " + this.b.score);
+        console.log("--------");
     }
-  
-    cardNames(cardValues) {
-      switch (cardValues) {
-        case "2":
-          return 2;
-          break;
-        case "3":
-          return 3;
-          break;
-        case "4":
-          return 4;
-          break;
-        case "5":
-          return 5;
-          break;
-        case "6":
-          return 6;
-          break;
-        case "7":
-          return 7;
-          break;
-        case "8":
-          return 8;
-          break;
-        case "9":
-          return 9;
-          break;
-        case "10":
-          return 10;
-          break;
-        case "J":
-          return 11;
-          break;
-        case "Q":
-          return 12;
-          break;
-        case "K":
-          return 13;
-          break;
-        case "A":
-          return 14;
-          break;
-      }
     }
-  
-    battle() {
-      //
-      //
+
+    gameResult() { // if/else statemnt to show result of game - who's the winner
+        if (player1.score > player2.score) {
+            console.log("The WINNER is Player1, with a score of " + player1.score + "\nPlayer2's final score is " + player2.score);
+        } else {
+            console.log("The WINNER is Player2, with a score of " + player2.score + "\nPlayer1's final score is " + player1.score)
+        }
     }
   }
-  
-  let firstDeck = new CardDeck();
-  firstDeck.createDeck();
-  console.log("just create my deck", firstDeck.deck);
-  firstDeck.shuffleDeck();
-  firstDeck.dealDeck();
 
-  let newGame = new Game();
-  newGame.turns();
-  console.log("Display", newGame.player1Card)
+let firstDeck = new CardDeck();
+
+
+let player1 = new Player("Player1", firstDeck.deck[0]); 
+let player2 = new Player("Player2", firstDeck.deck[1]);
+
+// console.log("Player1: "+player1.cards[0][1]);
+console.log("Player1: " + player1.cards);
+console.log("Player2: " + player2.cards);
+
+
+let newGame = new Game(player1, player2);
+newGame.turns();
+newGame.gameResult();
+
+
+
+// console.log(player1.score > player2.score);
+
+
+//   let player1 = new Player("Player1"); //creating first player
+//   let player2 = new Player("Player2");
+//   console.log(player1); //logging out player before any hands are dealt
+//   console.log(player2);
+  
+//   let firstDeck = new CardDeck();
+//   firstDeck.createDeck();
+//   console.log("just create my deck", firstDeck.deck);
+//   firstDeck.shuffleDeck();
+//   firstDeck.dealDeck();
+
+//   let newGame = new Game();
+//   newGame.turns();
+//   console.log("Display", newGame.turns)
   
   //console.log(newGame.cardNames("K"));
 // console.log(firstDeck)
