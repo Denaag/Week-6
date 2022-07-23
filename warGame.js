@@ -56,10 +56,13 @@ class Player {
   
     dealCards() {
     //here we will deal out 2 small decks of 26 to each player
-        const half = Math.ceil(this.deck.length / 2);    
+        const half = Math.ceil(this.deck.length / 2); 
+        // console.log(half)   
 
         const firstHalf = this.deck.slice(0, half); //splitting an array
+        // console.log(firstHalf)
         const secondHalf = this.deck.slice(half);
+        // console.log(secondHalf)
 
         console.log(this.deck = [firstHalf,secondHalf]); //pushing both hands into the empty deck array
     }
